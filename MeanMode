@@ -1,0 +1,68 @@
+import java.util.Scanner;
+public class MeanMode {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        System.out.print("How many numbers would you like to input? ");
+        int total = sc.nextInt();
+        
+        int nums[] = new int[total];
+        for(int i = 0; i < total; i++){
+            System.out.print("Enter number "+(i+1)+": ");
+            nums[i] = sc.nextInt();
+        }
+        int x = getMode(nums);
+        System.out.println("\nMean = "+getMean(nums));
+        if(currentHighestCount == 1){
+            System.out.println("Mode = None");
+        }else{
+            System.out.println("Mode = "+modeSt);
+        }
+    }
+    static double getMean(int nums[]){
+        int tot = 0;
+        for(int i = 0; i < nums.length; i++){
+            tot += nums[i];
+        }
+        return ((double)tot/nums.length);
+    }
+    
+    static String modestring = "";
+    static int HighestCount;
+    
+    static int getMode(int nums[]){
+        int HighestInd = 0;
+        
+        for(int i = 0; i < nums.length; i++){
+            int count = 0;
+            for(int j = 0; j < nums.length; j++){
+                if(nums[i] == nums[j]){
+                    count++;
+                }
+            }
+            if(count > HighestCount){
+                HighestCount = count;
+                HighestInd = i;
+                modestring = nums[i]+"";
+            }else if(count == HighestCount){
+                boolean done = false;
+                for(int k = 0; k < i ; k++){
+                    if(nums[i] == nums[k]){
+                        done = true;
+                    }
+                }
+                
+                if(done == false){
+                    if(modestring == ""){
+                        modestring = nums[i]+"";
+                    }else{
+                        modestring += ", "+nums[i];
+                    }
+                }
+                
+            }
+        }
+        return nums[HighestInd];
+    }
+    
+}
